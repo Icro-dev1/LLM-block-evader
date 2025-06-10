@@ -12,5 +12,7 @@ docker run -d --name sync-text-editor -p 8080:5000 -v sync-text-data:/data --res
 Podman:
 
 cd ~/local-sync-text-editor
+
 podman build -t local-sync-text-editor .
+
 podman run -d --name sync-text-editor -p 8080:5000 -v sync-text-data:/data local-sync-text-editor
