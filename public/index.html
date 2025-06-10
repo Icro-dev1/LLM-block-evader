@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sync Text Editor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 80%; height: 400px; font-size: 16px; }
+        button { margin: 10px 5px; }
+    </style>
+</head>
+<body>
+    <h2>Sync Text Editor</h2>
+    <textarea id="textArea" placeholder="Type or paste text here..."></textarea>
+    <br>
+    <button onclick="sendText()">Send Text</button>
+    <button onclick="fetchText()">Fetch Text</button>
+    <button onclick="copyText()">Copy to Clipboard</button>
+    <script>
+        async function sendText() {
+            const text = document.getElementById('textArea').value;
+            await fetch('/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'text=' + encodeURIComponent(text)
+            });
+        }
+        async function fetchText() {
+            const response = await fetch('/text');
+            const text = await response.text();
+            document.getElementById('textArea').value = text;
+        }
+        function copyText() {
+            const textArea = document.getElementById('textArea');
+            textArea.select();
+            document.execCommand('copy');
+            alert('Text copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
