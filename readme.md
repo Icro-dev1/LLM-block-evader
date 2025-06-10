@@ -1,4 +1,5 @@
 Navigate to this folder
+
 cd local-sync-text-editor
 
 In bash:
